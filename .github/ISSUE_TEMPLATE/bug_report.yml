@@ -38,16 +38,36 @@ body:
     attributes:
       label: BDS Version
       description: The version of BDS you are using. (e.g. 1.20.32.1)
+    validations:
+      required: true
 
   - type: input
     attributes:
       label: LeviLamina Version
       description: The version of LeviLamina you are using. (e.g. 1.0.0)
+    validations:
+      required: true
 
   - type: input
     attributes:
-      label: Version
-      description: The version of the plugin you are using. (e.g. 1.0.0)
+      label: GMLIB Version
+      description: The version of the GMLIB you are using. (e.g. 1.0.0)
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: iListenAttentively Version
+      description: The version of the iListenAttentively you are using. (e.g. 1.0.0)
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Mod Version
+      description: The version of the mod you are using. (e.g. 1.0.0)
+    validations:
+      required: true
 
   - type: textarea
     attributes:

@@ -1,19 +1,19 @@
 name: 新功能建议
-description: 如果需要更多API，请给出你的建议。
+description: 为这个项目提出一个想法
 title: "标题：新功能建议"
 labels: ["type: enhancement"]
 body:
   - type: textarea
     attributes:
       label: 您的新功能建议是否与问题有关？请描述。
-      description: 简述你在开发过程中遇到了什么问题？
+      description: 对问题所在的清晰而简洁的描述。例：每当……我总是很沮丧。
     validations:
       required: true
 
   - type: textarea
     attributes:
-      label: 你想要的接口
-      description: 简述你需要的API，以及具体功能。
+      label: 描述你想要的解决方案
+      description: 清晰而简洁地描述你想要发生的事情
     validations:
       required: true
 

@@ -38,16 +38,36 @@ body:
     attributes:
       label: BDS 版本
       description: 你所使用的 BDS 版本 (例如： 1.20.32.1)
+    validations:
+      required: true
 
   - type: input
     attributes:
       label: LeviLamina 版本
       description: 你所使用的 LeviLamina 版本 (例如： 1.0.0)
+    validations:
+      required: true
 
   - type: input
     attributes:
       label: GMLIB 版本
       description: 你所使用的 GMLIB 版本 (例如： 1.0.0)
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: iListenAttentively 版本
+      description: 你所使用的 iListenAttentively 版本 (例如： 1.0.0)
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Mod 版本
+      description: 你所使用的 Mod 版本 (例如： 1.0.0)
+    validations:
+      required: true
 
   - type: textarea
     attributes:
