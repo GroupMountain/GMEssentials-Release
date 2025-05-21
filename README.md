@@ -1,88 +1,106 @@
-# 功能配置说明
+![English](https://img.shields.io/badge/English-inactive?style=for-the-badge)
+[![中文](https://img.shields.io/badge/简体中文-informational?style=for-the-badge)](README.zh.md)
 
-## 配置文件结构
-```json
+> [!WARNING]
+> If you modify the configuration file, please reactivate or restart, do not reload this plugin at will.  
+> The command is **ll reactivate GMEssentials**
+
+# Function Configuration Description
+
+## Configuration file structure
+
+```jsonc
 {
     "version": 1,
     "features": {
-        /* 功能模块配置 */
-    },
-    "commands": {
-        /* 命令相关配置（当前版本暂未启用） */
+        /* Functional module configuration */
     },
     "ui": {
-        /* UI相关配置 */
+        /* UI related configuration */
     }
 }
 ```
 
-## 功能模块列表
+## Functional module list
 
-### 基础配置
-- `version`: 配置文件版本号
+### Basic Configuration
+
+- `version`: configuration file version number
 
 ---
 
-### 假种子 (fake_seed)
-**功能**：隐藏服务器真实种子，向玩家显示伪造的种子  
-**配置结构**：
-```json
+### Fake seed (fake_seed)
+
+**Function**: Hide the real server seed and show fake seeds to players  
+**Configuration structure**:
+
+```jsonc
 {
     "enable": false,
     "random": true,
     "seed": 0
 }
 ```
-- `enable`: 是否启用功能
-- `random`: 是否生成随机种子
-- `seed`: 指定固定种子（当random=false时生效）
+
+- `enable`: whether to enable the function
+- `random`: whether to generate a random seed
+- `seed`: specify a fixed seed (effective when random=false)
 
 ---
 
-### 材质包共存 (co_resource_pack)
-**功能**：允许客户端资源包与服务端资源包叠加使用  
-**配置值**：`true`/`false`
+### Coexistence of resource packs (co_resource_pack)
+
+**Function**: Allow client resource packs to be used in conjunction with server resource packs  
+**Configuration value**: `true`/`false`
 
 ---
 
-### 信任皮肤 (trusted_skin)
-**功能**：允许玩家正常显示彼此皮肤  
-**配置值**：`true`/`false`
+### Trusted_skin
+
+**Function**: Allow players to display each other's skins normally  
+**Configuration value**: `true`/`false`
 
 ---
 
-### 强制教育版 (force_education_edition)
-**功能**：强制开启教育版功能（不支持热加载）  
-**配置值**：`true`/`false`
+### Force Education Edition (force_education_edition)
+
+**Function**: Force to enable the educational version function (hot loading is not supported)  
+**Configuration value**: `true`/`false`
 
 ---
 
-### 强制成就 (force_achievements)
-**功能**：允许在禁止成就的存档中获得成就  
-**配置值**：`true`/`false`
+### Force_achievements
+
+**Function**: Allows achievements to be earned in archives that prohibit achievements  
+**Configuration value**: `true`/`false`
 
 ---
 
-### 假存档名 (fake_world_name)
-**功能**：自定义显示给玩家的世界名称  
-```json
+### Fake world name (fake_world_name)
+
+**Function**: Customize the world name displayed to players
+
+```jsonc
 {
     "enable": false,
-    "world_name": "§r§d自定义名称"
+    "world_name": "§r§dCustom name"
 }
 ```
 
 ---
 
-### 自动钓鱼 (automatic_fishing)
-**功能**：自动完成钓鱼操作  
-**配置值**：`true`/`false`
+### Automatic fishing (automatic_fishing)
+
+**Function**: Automatically complete fishing operations  
+**Configuration value**: `true`/`false`
 
 ---
 
-### 爆炸参数修改 (explosion_modify)
-**功能**：自定义爆炸行为参数  
-```json
+### Explosion parameter modification (explosion_modify)
+
+**Function**: Customize explosion behavior parameters
+
+```jsonc
 {
     "enable": false,
     "defaultSetting": {
@@ -99,17 +117,21 @@
     }
 }
 ```
-- `explosionSetting`支持配置特定爆炸源的参数（如minecraft:creeper、minecraft:bed等）
-- `defaultSetting`为默认参数，当`explosionSetting`中未指定特定爆炸源时，使用默认参数
-- `allowExplosion`: 是否允许爆炸
-- `maxRadius`: 最大爆炸半径
-- `allowDestroy`: 是否允许破坏方块
-- `allowFire`: 是否允许产生火焰
+
+- `explosionSetting` supports configuring parameters for specific explosion sources (such as minecraft:creeper, minecraft:bed, etc.)
+- `defaultSetting` is the default parameter. When no specific explosion source is specified in `explosionSetting`, the default parameter is used.
+- `allowExplosion`: whether explosion is allowed
+- `maxRadius`: maximum explosion radius
+- `allowDestroy`: whether to allow the destruction of blocks
+- `allowFire`: whether to allow fire
+
 ---
 
-### 自定义命令别名 (custom_cmd_alias)
-**功能**：为命令创建别名  
-```json
+### Custom command alias (custom_cmd_alias)
+
+**Function**: Create aliases for commands
+
+```jsonc
 {
     "enable": false,
     "alias": {
@@ -121,70 +143,376 @@
 
 ---
 
-### 双开门 (double_door)
-**功能**：自动同步开关相邻的门  
-**配置值**：`true`/`false`
+### Double door (double_door)
+
+**Function**: Automatically open and close adjacent doors synchronously  
+**Configuration value**: `true`/`false`
 
 ---
 
-### 修复 gamemode 6 (gamemode6_fix)
-**功能**：修复/gamemode 6命令支持
-**配置值**：`true`/`false`
+### Fix gamemode 6 (gamemode6_fix)
+
+**FEATURE**: Fixed /gamemode 6 command support  
+**Configuration value**: `true`/`false`
 
 ---
 
-### 禁止设置界面修改权限 (block_modify_permissions)
-**功能**：禁止通过设置界面修改权限
-**配置值**：`true`/`false`
+### Disable setting interface modification permissions (block_modify_permissions)
+
+**Function**: Disable the modification of permissions through the settings interface  
+**Configuration value**: `true`/`false`
 
 ---
 
-### 锁定世界设置 (lock_world_settings)
-**功能**：锁定世界设置
-**配置值**：`true`/`false`
+### Lock World Settings (lock_world_settings)
+
+**Function**: Lock world settings  
+**Configuration value**: `true`/`false`
 
 ---
 
-### 潜行右键预览容器 (container_reader)
-**功能**：潜行+空手+右键打开打不开的容器时,会打开一个无法操作的容器,用于预览
-**配置值**：`true`/`false`
+### Right click to preview container (container_reader)
+
+**Function**: When sneaking + empty-handed + right-clicking to open an unopenable container, an inoperable container will be opened for preview  
+**Configuration value**: `true`/`false`
 
 ---
 
-### 树叶快速腐烂 (fast_leaf_decay)
-**功能**：树叶快速腐烂
-**配置值**：`true`/`false`
+### Fast leaf decay (fast_leaf_decay)
+
+**Function**: Leaves decay quickly
+
+```jsonc
+{
+    "enable": false,
+    "time": {
+        "min": 10,
+        "max": 20
+    }
+}
+```
+
+- `time`: Set the minimum and maximum time for leaves to decay (unit: tick)
 
 ---
 
-### 假人无需睡觉 (fake_player_no_sleep)
-**功能**：睡觉时不会计算假人
-**配置值**：`true`/`false`
+### Fake player no need to sleep (fake_player_no_sleep)
+
+**Function**: No dummies will be counted when sleeping  
+**Configuration value**: `true`/`false`
 
 ---
 
-### 隐藏OP标志 (invisible_op)
-**功能**：看不见管理员的标志皇冠
-**配置值**：`true`/`false`
+### Hidden OP flag (invisible_op)
+
+**Function**: Make the administrator's crown invisible  
+**Configuration value**: `true`/`false`
 
 ---
 
-### 未知方块清理 (cleaner_unknown_block)
-**功能**: 加载区块时清理未知方块
-**配置值**：`true`/`false`
+### Unknown Block Cleaner (cleaner_unknown_block)
+
+**Function**: Clean unknown blocks when loading chunks  
+**Configuration value**: `true`/`false`
 
 ---
 
-## 命令模块列表
+### Resource Pack Download Fix (resource_pack_download_fix)
 
-> 无
+**Function**: Fixed the issue that the client cannot download the server texture pack in some cases  
+**Configuration value**: `true`/`false`
 
 ---
 
-## UI模块列表
+### Motd fake (fake_motd)
 
-### 插件设置UI
-**功能**：在设置界面添加插件设置选项
-**配置值**: `true`/`false`
+**Function**: Forged server Modd
+
+```jsonc
+{
+    "enable": false,
+    "motd": {
+        "enable": false,
+        "content": "§r§dCustom Motd"
+    },
+    "protocol_version": {
+        "enable": false,
+        "protocol_version": 758
+    },
+    "network_version": {
+        "enable": false,
+        "content": "1.21.60"
+    },
+    "player_count": {
+        "enable": false,
+        "player_count": 0
+    },
+    "max_player_count": {
+        "enable": false,
+        "max_player_count": 0
+    },
+    "guid": {
+        "enable": false,
+        "content": "Custom GUID"
+    },
+    "level_name": {
+        "enable": false,
+        "content": "Custom world name"
+    },
+    "game_mode": {
+        "enable": false,
+        "content": "Creative"
+    },
+    "local_port": {
+        "enable": false,
+        "local_port": 19132
+    },
+    "local_port_v6": {
+        "enable": false,
+        "local_port_v6": 19132
+    },
+    "other": {
+        "enable": false,
+        "content": ["Custom other information"]
+    }
+}
+```
+
+- `enable`: whether to enable forgery
+- `motd`: Forge Motd
+- `protocol_version`: fake protocol version
+- `network_version`: fake network version
+- `player_count`: fake the number of online players
+- `max_player_count`: fake maximum number of players
+- `guid`: forge GUID
+- `level_name`: fake world name
+- `game_mode`: fake game mode
+  - `Survival`: Survival
+  - `Creative`: Creation
+  - `Adventure`: Adventure
+  - `Spectator`: Spectator
+  - `Default`: Default
+- `local_port`: fake local port
+- `local_port_v6`: fake local port V6
+- `other`: fake other information
+
+---
+
+### Scheduled tasks (schedule_task)
+
+**Function**: Scheduled execution of tasks
+
+```jsonc
+{
+    "enable": false,
+    "tasks": [
+        {
+            "cron": "0 0 0 * * ?",
+            "task": "say scheduled task executed",
+            "output": false
+        }
+    ]
+}
+```
+
+- `enable`: whether to enable scheduled tasks
+- `tasks`: Scheduled task list
+  - `cron`: Scheduled task Cron expression
+  - `task`: the command to execute
+  - `output`: Whether the console outputs the task execution results
+
+---
+
+### Quick Command GUI (quick_cmd_gui)
+
+**Function**: Add GUI to the original command
+
+```jsonc
+{
+    "enable": false,
+    "commands": {
+        "gamemode": false,
+        "difficulty": false,
+        "time": false,
+        "weather": false,
+        "kick": false,
+    }
+}
+```
+
+---
+
+### Command Map (command_map)
+
+**Function**: Register custom command mapping
+
+```jsonc
+{
+    "enable": false,
+    "map": {
+        "gmc": {
+            "command": "gamemode 1",
+            "description": "Switch to creative mode",
+            "permission": "GameDirectors"
+        },
+        "gms": {
+            "command": "gamemode 0",
+            "description": "Switch to survival mode",
+            "permission": "GameDirectors"
+        },
+        "gma": {
+            "command": "gamemode 2",
+            "description": "Switch to adventure mode",
+            "permission": "GameDirectors"
+        },
+        "gmsp": {
+            "command": "gamemode spectator",
+            "description": "Switch to spectator mode",
+            "permission": "GameDirectors"
+        }
+    }
+}
+```
+
+- `command`: the command to execute
+- `description`: description of the command
+- `permission`: the permission required to execute this command
+
+> **Note**: The execution of the command is mandatory, regardless of whether the executor has the authority to execute the command, it will be enforced and ignore the permission check.
+
+---
+
+### Farmland protection (farm_land_protect)
+
+**Function**: Protect farmland from being trampled and turned into mud  
+**Configuration value**: `true`/`false`
+
+---
+
+### Dynamic Motd (dynamic_motd)
+
+**Function**: Dynamically switch and update Modd
+
+```jsonc
+{
+    "enable": true,
+    "update_interval": 2500,
+    "content": [
+        "Welcome to the server!",
+        "This is a dynamic motd example.",
+        "The motd will be updated every 2.5 seconds.",
+        "current version: ${papi:server_version}"
+    ]
+}
+```
+
+- `enable`: whether to enable dynamic Modd
+- `update_interval`: the time interval for updating Modd (unit: milliseconds)
+- `content`: Motd content list (supports PAPI variables)
+
+---
+
+### Automatic item replenishment (auto_reload)
+
+**Function**: Automatically replenish items when they are used up  
+**Configuration value**: `true`/`false`
+
+---
+
+### Death Loot by Dimension (death_loot_dimension)
+
+**_Feature_**: Controls item drop on death in different dimensions
+
+```jsonc
+{
+    "enable": false,
+    "dimensions": {
+        "overworld": false,
+        "nether": false,
+        "the end": false
+    }
+}
+```
+
+- `dimensions`: Dimension list (supports custom dimensions)
+  - `overworld`: Overworld
+  - `nether`: Nether
+  - `the end`: The End
+
+> **Note**: The dimension keys represent `whether to enable keep inventory` (prevent item drops) instead of controlling whether items drop.
+
+---
+
+### Chat Record (chat_record)
+
+**Feature**: Logs chat history, allowing players to view previous chats after rejoining the server.
+
+```jsonc
+{
+    "enable": false,
+    "max_record": 50
+}
+```
+
+- `max_record`: Maximum number of chat entries stored
+
+---
+
+### Experiments Editor (experiments_editor)
+
+**Feature**: Edit experimental gameplay features
+
+```jsonc
+{
+    "enable": false,
+    "experiments": {
+        "camera_aim_assist": false,
+        "data_driven_biomes": false,
+        "gametest": false,
+        "jigsaw_structures": false,
+        "third_person_cameras": false,
+        "upcoming_creator_features": false,
+        "villager_trades_rebalance": false,
+        "y_2025_drop_1": false
+    }
+}
+```
+
+- `experiments`: List of experimental features
+  - `camera_aim_assist`: Camera Aim Assist
+  - `data_driven_biomes`: Data-Driven Biomes
+  - `gametest`: GameTest Framework
+  - `jigsaw_structures`: Data-Driven Jigsaw Structures
+  - `third_person_cameras`: Creator Cameras: New Third-Person Presets
+  - `upcoming_creator_features`: Upcoming Creator Features
+  - `villager_trades_rebalance`: Villager Trade Rebalance
+  - `y_2025_drop_1`: 2025 Drop 1
+
+---
+
+### Addon Loader (addon_loader)
+
+**Feature**: Simplifies addon loading
+
+```jsonc
+{
+    "enable": false,
+    "directory": [
+        "./addons"
+    ]
+}
+```
+
+- `directory`: List of directories to load addons from
+  - All folders and files with extensions like `.zip`, `.mcpack`, or `.mcaddon` in these directories will be automatically loaded.
+
+---
+
+## UI module list
+
+### Plugin Settings UI (server_settings)
+
+**Function**: Add plugin setting options in the settings interface  
+**Configuration value**: `true`/`false`
 
 ---
