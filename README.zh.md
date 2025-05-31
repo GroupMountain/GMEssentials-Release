@@ -76,6 +76,13 @@
 
 ---
 
+### 强制注册 Ability 命令 (force_register_ability_cmd)
+
+**功能**：强制注册 /ability 命令
+**配置值**：`true`/`false`
+
+---
+
 ### 假存档名 (fake_world_name)
 
 **功能**：自定义显示给玩家的世界名称
@@ -140,6 +147,29 @@
     }
 }
 ```
+
+---
+
+### 自定义命令权限 (custom_cmd_permissions)
+
+**功能**：强制修改命令执行所需权限
+
+```jsonc
+{
+    "enable": false,
+    "permissions": {
+        "stop": "GameDirectors"
+    }
+}
+```
+
+- `permissions`支持配置特定命令的权限（如 stop、give 等）
+  - `Any`: 玩家(可以执行 /list,/me,/w 等命令)
+  - `GameDirectors`: 管理员(可以执行 /clear,/fill,/give,/kill 等命令)
+  - `Admin`: 管理员(可以执行 /op,/deop,/reload,/wsserver 等命令)
+  - `Host`: 房主(可以执行 /setmaxplayers 等命令)
+  - `Owner`: 控制台(可以执行 /transfer,/stop,/save 等命令)
+  - `Internal`: 内部权限(暂未发现和 Owner 权限的区别)
 
 ---
 
@@ -300,7 +330,7 @@
 
 ### 定时任务 (schedule_task)
 
-**功能**：定时执行任务
+**功能**：定时执行命令
 
 ```jsonc
 {
@@ -308,7 +338,7 @@
     "tasks": [
         {
             "cron": "0 0 0 * * ?",
-            "task": "say 定时任务执行了",
+            "command": "say 定时任务执行了",
             "output": false
         }
     ]
@@ -318,7 +348,7 @@
 - `enable`: 是否启用定时任务
 - `tasks`: 定时任务列表
   - `cron`: 定时任务 Cron 表达式
-  - `task`: 执行的命令
+  - `command`: 执行的命令
   - `output`: 控制台是否输出任务执行结果
 
 ---
@@ -349,34 +379,73 @@
 ```jsonc
 {
     "enable": false,
-    "map": {
-        "gmc": {
-            "command": "gamemode 1",
-            "description": "切换为创造模式",
-            "permission": "GameDirectors"
-        },
-        "gms": {
-            "command": "gamemode 0",
-            "description": "切换为生存模式",
-            "permission": "GameDirectors"
-        },
-        "gma": {
-            "command": "gamemode 2",
-            "description": "切换为冒险模式",
-            "permission": "GameDirectors"
-        },
-        "gmsp": {
-            "command": "gamemode spectator",
-            "description": "切换为旁观者模式",
-            "permission": "GameDirectors"
+    "commands": [
+        {
+            "command": "test",
+            "description": "测试命令",
+            "run_commands": [
+                {
+                    "command": "say 测试命令执行了, 输入内容: $1, 枚举值: $2",
+                    "output": true,
+                    "permission": "Any"
+                }
+            ],
+            "permission": "Any",
+            "params": [
+                {
+                    "name": "message",
+                    "type": "String",
+                    "optional": false
+                },
+                {
+                    "name": "enum",
+                    "type": "Enum",
+                    "optional": false,
+                    "enum_name": "gmessentials_test_enum",
+                    "choices": [
+                        "A",
+                        "B",
+                        "C"
+                    ]
+                }
+            ]
         }
-    }
+    ]
 }
 ```
 
-- `command`: 要执行的命令
-- `description`: 命令的描述
-- `permission`: 执行此命令所需的权限
+- `command`: 要注册的命令
+- `description`: 命令描述
+- `run_commands`: 执行的命令列表
+  - `command`: 执行的命令(支持参数替换$0 为命令名, $1 为第一个参数, $2 为第二个参数, 以此类推)
+  - `output`: 是否输出命令执行结果
+  - `permission`: 执行命令所需的权限
+- `permission`: 注册执行命令所需的权限
+- `params`: 参数列表
+  - `name`: 参数名称
+  - `type`: 参数类型
+    - `Int`: 整数
+    - `Bool`: 布尔值
+    - `Float`: 浮点数
+    - `Dimension`: 维度名
+    - `String`: 字符串
+    - `Enum`: 枚举值
+    - `SoftEnum`: 可变枚举
+    - `Actor`: 实体
+    - `Player`: 玩家
+    - `BlockPos`: 整数坐标
+    - `Vec3`: 浮点数坐标
+    - `RawText`: 原始文本(和 String 不一样)
+    - `JsonValue`: JSON 值
+    - `Item`: 物品类型
+    - `BlockName`: 方块类型
+    - `BlockState`: 方块状态
+    - `Effect`: 效果类型
+    - `ActorType`: 实体类型
+    - `Command`: 命令(用于子命令，如 execute 的 run)
+  - `optional`: 是否可选
+  - `enum_name`: 枚举名称(当参数类型为 Enum 或 SoftEnum 时必填)
+  - `choices`: 枚举值列表(当参数类型为 Enum 或 SoftEnum 时可选)
 
 > **注意**：执行命令是强制执行的，无论执行者对执行的命令是否有权限，都会强制执行，无视权限检测。
 
@@ -421,7 +490,7 @@
 
 ### 指定维度死亡掉落 (death_loot_dimension)
 
-**\*功能**：控制不同维度死亡是否掉落物品
+**功能**：控制不同维度死亡是否掉落物品
 
 ```jsonc
 {
@@ -504,7 +573,93 @@
 ```
 
 - `directory`: Addon 加载目录列表
-  - 在目录下的文件夹和 zip, mcpack, mcaddon 等后缀文件都会被尝试加载
+  - 在目录下的文件夹和 zip, mcpack, mcaddon
+
+---
+
+### 聊天格式化 (chat_formatter)
+
+**功能**：自定义聊天格式
+
+```jsonc
+{
+    "enable": true,
+    "format": {
+        "default": "<${papi:player_realname}> ${message}",
+        "zh_CN": "<${papi:player_realname}> ${message}",
+        "en_US": "<${papi:player_realname}> ${message}"
+    }
+}
+```
+
+- `format`: 聊天格式列表
+  - `default`: 默认聊天格式
+  - `...`: 其他语言聊天格式 (例如: `zh_CN`, `en_US`)
+
+> **注意**: 支持 papi 多语言翻译，前提是 papi 变量支持。
+
+---
+
+### Buff 禁用 (ban_buff)
+
+**功能**：禁用某些 Buff
+
+```jsonc
+{
+    "enable": false,
+    "buffs": [
+        "infested",
+    ]
+}
+```
+
+---
+
+### 维度命令禁用 (dimension_disabling_command)
+
+**功能**：在特定维度下禁用某些命令
+
+```jsonc
+{
+    "enable": false,
+    "dimensions": {
+        "overworld": ["tell"],
+        "nether": ["me"],
+        "the end": ["list"]
+    }
+}
+```
+
+- `dimensions`: 维度列表(支持自定义维度)
+  - `overworld`: 主世界
+  - `nether`: 下界
+  - `the end`: 末地
+
+---
+
+### 实体禁用 (ban_entity)
+
+**功能**：禁用某些实体
+
+```jsonc
+{
+    "enable": false,
+    "entities": {
+        "minecraft:silverfish": {
+            "load": false,
+            "spawn": true,
+            "place": false,
+            "summon": false
+        }
+    }
+}
+```
+
+- `entities`: 实体列表
+  - `load`: 从存档中加载
+  - `spawn`: 自然生成
+  - `place`: 生物蛋放置
+  - `summon`: 命令召唤
 
 ---
 

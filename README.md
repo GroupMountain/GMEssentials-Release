@@ -55,7 +55,7 @@
 
 ---
 
-### Trusted_skin
+### Trusted_skin (trusted_skin)
 
 **Function**: Allow players to display each other's skins normally  
 **Configuration value**: `true`/`false`
@@ -69,10 +69,17 @@
 
 ---
 
-### Force_achievements
+### Force_achievements (force_achievements)
 
 **Function**: Allows achievements to be earned in archives that prohibit achievements  
 **Configuration value**: `true`/`false`
+
+---
+
+### Force-register Ability Command (force_register_ability_cmd)
+
+**Feature**: Force-registers the `/ability` command  
+**Config Value**: `true`/`false`
 
 ---
 
@@ -140,6 +147,29 @@
     }
 }
 ```
+
+---
+
+### Custom Command Permissions (custom_cmd_permissions)
+
+**Feature**: Overrides default command execution permissions
+
+```jsonc
+{
+    "enable": false,
+    "permissions": {
+        "stop": "GameDirectors"
+    }
+}
+```
+
+- `permissions`: Custom permission levels for specific commands (e.g., `stop`, `give`)
+  - `Any`: Players (can execute `/list`, `/me`, `/whisper`, etc.)
+  - `GameDirectors`: Moderators (can execute `/clear`, `/fill`, `/give`, `/kill`, etc.)
+  - `Admin`: Administrators (can execute `/op`, `/deop`, `/reload`, `/wsserver`, etc.)
+  - `Host`: Server Host (can execute `/setmaxplayers`, etc.)
+  - `Owner`: Console/Owner (can execute `/transfer`, `/stop`, `/save`, etc.)
+  - `Internal`: Internal Tier (no functional difference from `Owner` identified yet)
 
 ---
 
@@ -300,7 +330,7 @@
 
 ### Scheduled tasks (schedule_task)
 
-**Function**: Scheduled execution of tasks
+**Function**: Scheduled execution of commands
 
 ```jsonc
 {
@@ -308,7 +338,7 @@
     "tasks": [
         {
             "cron": "0 0 0 * * ?",
-            "task": "say scheduled task executed",
+            "command": "say scheduled task executed",
             "output": false
         }
     ]
@@ -318,7 +348,7 @@
 - `enable`: whether to enable scheduled tasks
 - `tasks`: Scheduled task list
   - `cron`: Scheduled task Cron expression
-  - `task`: the command to execute
+  - `command`: the command to execute
   - `output`: Whether the console outputs the task execution results
 
 ---
@@ -342,43 +372,82 @@
 
 ---
 
-### Command Map (command_map)
+### Command Mapping (command_map)
 
-**Function**: Register custom command mapping
+**Feature**: Registers custom command mappings
 
 ```jsonc
 {
     "enable": false,
-    "map": {
-        "gmc": {
-            "command": "gamemode 1",
-            "description": "Switch to creative mode",
-            "permission": "GameDirectors"
-        },
-        "gms": {
-            "command": "gamemode 0",
-            "description": "Switch to survival mode",
-            "permission": "GameDirectors"
-        },
-        "gma": {
-            "command": "gamemode 2",
-            "description": "Switch to adventure mode",
-            "permission": "GameDirectors"
-        },
-        "gmsp": {
-            "command": "gamemode spectator",
-            "description": "Switch to spectator mode",
-            "permission": "GameDirectors"
+    "commands": [
+        {
+            "command": "test",
+            "description": "Test command",
+            "run_commands": [
+                {
+                    "command": "say Test command executed, input: $1, enum: $2",
+                    "output": true,
+                    "permission": "Any"
+                }
+            ],
+            "permission": "Any",
+            "params": [
+                {
+                    "name": "message",
+                    "type": "String",
+                    "optional": false
+                },
+                {
+                    "name": "enum",
+                    "type": "Enum",
+                    "optional": false,
+                    "enum_name": "gmessentials_test_enum",
+                    "choices": [
+                        "A",
+                        "B",
+                        "C"
+                    ]
+                }
+            ]
         }
-    }
+    ]
 }
 ```
 
-- `command`: the command to execute
-- `description`: description of the command
-- `permission`: the permission required to execute this command
+- `command`: Command to register
+- `description`: Command description
+- `run_commands`: List of commands to execute
+  - `command`: Command to execute (supports `$0` for command name, `$1` for first parameter, etc.)
+  - `output`: Whether to output command execution results
+  - `permission`: Permission required to execute the command
+- `permission`: Permission required to register/use the command
+- `params`: Parameter list
+  - `name`: Parameter name
+  - `type`: Parameter type
+    - `Int`: Integer
+    - `Bool`: Boolean
+    - `Float`: Floating-point number
+    - `Dimension`: Dimension name
+    - `String`: String
+    - `Enum`: Enumeration value
+    - `SoftEnum`: Dynamic enumeration
+    - `Actor`: Entity
+    - `Player`: Player
+    - `BlockPos`: Integer coordinates
+    - `Vec3`: Floating-point coordinates
+    - `RawText`: Raw text (differs from String)
+    - `JsonValue`: JSON value
+    - `Item`: Item type
+    - `BlockName`: Block type
+    - `BlockState`: Block state
+    - `Effect`: Effect type
+    - `ActorType`: Entity type
+    - `Command`: Command (used for subcommands like `execute run`)
+  - `optional`: Whether the parameter is optional
+  - `enum_name`: Enumeration name (required for `Enum`/`SoftEnum` types)
+  - `choices`: Enumeration value list (optional for `Enum`/`SoftEnum` types)
 
-> **Note**: The execution of the command is mandatory, regardless of whether the executor has the authority to execute the command, it will be enforced and ignore the permission check.
+> **Note**: Commands in `run_commands` are **forcibly executed** regardless of the executor's permissions. Permission checks are ignored.
 
 ---
 
@@ -505,6 +574,94 @@
 
 - `directory`: List of directories to load addons from
   - All folders and files with extensions like `.zip`, `.mcpack`, or `.mcaddon` in these directories will be automatically loaded.
+
+---
+
+### Chat Formatter (chat_formatter)
+
+**Feature**: Customizes chat message formatting
+
+```jsonc
+{
+    "enable": true,
+    "format": {
+        "default": "<${papi:player_realname}> ${message}",
+        "zh_CN": "<${papi:player_realname}> ${message}",
+        "en_US": "<${papi:player_realname}> ${message}"
+    }
+}
+```
+
+- `format`: Chat format rules
+  - `default`: Default chat format
+  - `...`: Language-specific formats (e.g., `zh_CN`, `en_US`)
+
+> **Note**: Supports PAPI placeholders and multilingual formatting, _if_ the referenced PAPI variables have multilingual capabilities.
+
+---
+
+### Buff Blacklist (ban_buff)
+
+**Feature**: Disables specified buffs/effects
+
+```jsonc
+{
+    "enable": false,
+    "buffs": [
+        "infested"
+    ]
+}
+```
+
+- `buffs`: List of buff/effect IDs to disable
+
+---
+
+### Dimension-based Command Restrictions (dimension_disabling_command)
+
+**Feature**: Disables specified commands in specific dimensions
+
+```jsonc
+{
+    "enable": false,
+    "dimensions": {
+        "overworld": ["tell"],
+        "nether": ["me"],
+        "the end": ["list"]
+    }
+}
+```
+
+- `dimensions`: Dimension list (supports custom dimensions)
+  - `overworld`: Overworld
+  - `nether`: Nether
+  - `the end`: The End
+
+---
+
+### Entity Restrictions (ban_entity)
+
+**Feature**: Disables specified entities
+
+```jsonc
+{
+    "enable": false,
+    "entities": {
+        "minecraft:silverfish": {
+            "load": false,
+            "spawn": true,
+            "place": false,
+            "summon": false
+        }
+    }
+}
+```
+
+- `entities`: Entity restriction list
+  - `load`: Load from save
+  - `spawn`: Natural spawning
+  - `place`: Spawning via spawn egg
+  - `summon`: Summon via command
 
 ---
 
