@@ -14,6 +14,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+
+## [0.2.1] - 2025-06-12
+
+### Added
+
+- Added XpOrbMerge feature @zimuya4153
+- Added CostTime class @zimuya4153
+- Added CostTime to some features @zimuya4153
+- Added log_level to Config @zimuya4153
+
+### Fixed
+
+- Fixed performance issue of the CleanerUnknownBlock feature [#23] @zimuya4153
+- Fixed crash for loading config file @zimuya4153
+
 ### [0.2.0] - 2025-06-01
 
 ### Changed
@@ -100,6 +115,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added LockWorldSettings feature @KobeBryant114514
 - Added ServerSettingsUI ui @zimuya4153 @KobeBryant114514
 
+[#23]: https://github.com/GroupMountain/GMEssentials-Release/issues/23
 [#22]: https://github.com/GroupMountain/GMEssentials-Release/issues/22
 [#20]: https://github.com/GroupMountain/GMEssentials-Release/issues/20
 [#17]: https://github.com/GroupMountain/GMEssentials-Release/issues/17
@@ -115,7 +131,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#3]: https://github.com/GroupMountain/GMEssentials-Release/issues/3
 [#1]: https://github.com/GroupMountain/GMEssentials-Release/issues/1
 
-[Unreleased]: https://github.com/GroupMountain/GMEessentials/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/GroupMountain/GMEessentials/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/GroupMountain/GMEessentials/compare/v0.2.0...0.2.1
 [0.2.0]: https://github.com/GroupMountain/GMEessentials/compare/v0.1.2...0.2.0
 [0.1.2]: https://github.com/GroupMountain/GMEessentials/compare/v0.1.1...0.1.2
 [0.1.1]: https://github.com/GroupMountain/GMEessentials/compare/v0.1.0...0.1.1

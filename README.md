@@ -12,6 +12,7 @@
 ```jsonc
 {
     "version": 1,
+    "log_level": "Info",
     "features": {
         /* Functional module configuration */
     },
@@ -26,6 +27,7 @@
 ### Basic Configuration
 
 - `version`: configuration file version number
+- `log_level`: log level (Trace, Debug, Info, Warn, Error, Fatal, Off)
 
 ---
 
@@ -662,6 +664,23 @@
   - `spawn`: Natural spawning
   - `place`: Spawning via spawn egg
   - `summon`: Summon via command
+
+---
+
+### XP Orb Merging (xp_orb_merge)  
+
+**Feature**: Merges nearby experience orbs  
+
+```jsonc  
+{  
+    "enable": false,  
+    "radius": 3.0,  
+    "time": 20  
+}  
+```  
+
+- `radius`: Merge radius (合并半径)  
+- `time`: Interval between merge operations (in ticks) (多久执行一次合并操作，单位：刻)  
 
 ---
 

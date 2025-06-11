@@ -12,6 +12,7 @@
 ```jsonc
 {
     "version": 1,
+    "log_level": "Info",
     "features": {
         /* 功能模块配置 */
     },
@@ -26,6 +27,7 @@
 ### 基础配置
 
 - `version`: 配置文件版本号
+- `log_level`: 日志级别 (Trace, Debug, Info, Warn, Error, Fatal, Off)
 
 ---
 
@@ -660,6 +662,23 @@
   - `spawn`: 自然生成
   - `place`: 生物蛋放置
   - `summon`: 命令召唤
+
+---
+
+### 经验球合并 (xp_orb_merge)
+
+**功能**：合并相近的经验球
+
+```jsonc
+{
+    "enable": false,
+    "radius": 3.0,
+    "time": 20
+}
+```
+
+- `radius`: 合并半径
+- `time`: 多久执行一次合并操作(单位:刻)
 
 ---
 
