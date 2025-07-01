@@ -1,11 +1,12 @@
-name: 漏洞反馈
-description: 如果插件存在漏洞，请在此反馈。
-title: "标题：漏洞反馈"
-labels: ["type: bug"]
+name: Bug 反馈
+description: 如果插件存在Bug，请在此反馈。
+title: "[Bug]: "
+labels: ["bug"]
+type: "Bug"
 body:
   - type: textarea
     attributes:
-      label: 简述漏洞
+      label: 简述Bug
       description: 发生了什么问题？
     validations:
       required: true

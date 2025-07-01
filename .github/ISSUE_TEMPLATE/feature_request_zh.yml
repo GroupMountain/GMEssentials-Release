@@ -1,7 +1,8 @@
 name: 新功能建议
 description: 为这个项目提出一个想法
-title: "标题：新功能建议"
-labels: ["type: enhancement"]
+title: "[Feature]: "
+labels: ["enhancement"]
+type: "Feature"
 body:
   - type: textarea
     attributes:
