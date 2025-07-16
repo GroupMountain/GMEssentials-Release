@@ -11,7 +11,7 @@
 
 ```jsonc
 {
-    "version": 1,
+    "version": 4,
     "log_level": "Info",
     "features": {
         /* 功能模块配置 */
@@ -340,7 +340,9 @@
     "tasks": [
         {
             "cron": "0 0 0 * * ?",
-            "command": "say 定时任务执行了",
+            "command": [
+                "say 定时任务执行了"
+            ],
             "output": false
         }
     ]
@@ -350,7 +352,7 @@
 - `enable`: 是否启用定时任务
 - `tasks`: 定时任务列表
   - `cron`: 定时任务 Cron 表达式
-  - `command`: 执行的命令
+  - `commands`: 执行的命令
   - `output`: 控制台是否输出任务执行结果
 
 ---
@@ -388,8 +390,7 @@
             "run_commands": [
                 {
                     "command": "say 测试命令执行了, 输入内容: $1, 枚举值: $2",
-                    "output": true,
-                    "permission": "Any"
+                    "output": true
                 }
             ],
             "permission": "Any",
@@ -421,7 +422,6 @@
 - `run_commands`: 执行的命令列表
   - `command`: 执行的命令(支持参数替换$0 为命令名, $1 为第一个参数, $2 为第二个参数, 以此类推)
   - `output`: 是否输出命令执行结果
-  - `permission`: 执行命令所需的权限
 - `permission`: 注册执行命令所需的权限
 - `params`: 参数列表
   - `name`: 参数名称
@@ -537,27 +537,28 @@
 {
     "enable": false,
     "experiments": {
-        "camera_aim_assist": false,
-        "data_driven_biomes": false,
-        "gametest": false,
-        "jigsaw_structures": false,
-        "third_person_cameras": false,
-        "upcoming_creator_features": false,
-        "villager_trades_rebalance": false,
-        "y_2025_drop_1": false
+        "TestExperiment": false,
+        "NextUpdate": false,
+        "DisabledExperiment": false,
+        "ExperimentalText": false,
+        "AllowSeedChange": false,
+        "DataDrivenBiomes": false,
+        "UpcomingCreatorFeatures": false,
+        "BetaApis": false,
+        "DataDrivenVanillaBlocksAndItems": false,
+        "DisableDataDrivenVanillaBlocksAndItems": false,
+        "ExperimentalCreatorCameras": false,
+        "MinecraftExplorer": false,
+        "DeferredTechnicalPreview": false,
+        "VillagerTradesRebalance": false,
+        "VanillaBlockGeometry": false,
+        "JigsawStructures": false,
+        "SimplifiedSpawnRules": false
     }
 }
 ```
 
 - `experiments`: 实验玩法列表
-  - `camera_aim_assist`: 瞄准辅助
-  - `data_driven_biomes`: 自定义生物群系
-  - `gametest`: 测试 API
-  - `jigsaw_structures`: 数据驱动拼图结构
-  - `third_person_cameras`: 创作者相机：新的第三人称预设
-  - `upcoming_creator_features`: 即将推出的创作者功能
-  - `villager_trades_rebalance`: 村民贸易再平衡
-  - `y_2025_drop_1`: 2025 年第一次更新
 
 ---
 

@@ -11,7 +11,7 @@
 
 ```jsonc
 {
-    "version": 1,
+    "version": 4,
     "log_level": "Info",
     "features": {
         /* Functional module configuration */
@@ -340,7 +340,9 @@
     "tasks": [
         {
             "cron": "0 0 0 * * ?",
-            "command": "say scheduled task executed",
+            "commands": [
+                "say scheduled task executed"
+            ],
             "output": false
         }
     ]
@@ -350,7 +352,7 @@
 - `enable`: whether to enable scheduled tasks
 - `tasks`: Scheduled task list
   - `cron`: Scheduled task Cron expression
-  - `command`: the command to execute
+  - `commands`: the commands to execute
   - `output`: Whether the console outputs the task execution results
 
 ---
@@ -388,8 +390,7 @@
             "run_commands": [
                 {
                     "command": "say Test command executed, input: $1, enum: $2",
-                    "output": true,
-                    "permission": "Any"
+                    "output": true
                 }
             ],
             "permission": "Any",
@@ -421,7 +422,6 @@
 - `run_commands`: List of commands to execute
   - `command`: Command to execute (supports `$0` for command name, `$1` for first parameter, etc.)
   - `output`: Whether to output command execution results
-  - `permission`: Permission required to execute the command
 - `permission`: Permission required to register/use the command
 - `params`: Parameter list
   - `name`: Parameter name
@@ -537,27 +537,28 @@
 {
     "enable": false,
     "experiments": {
-        "camera_aim_assist": false,
-        "data_driven_biomes": false,
-        "gametest": false,
-        "jigsaw_structures": false,
-        "third_person_cameras": false,
-        "upcoming_creator_features": false,
-        "villager_trades_rebalance": false,
-        "y_2025_drop_1": false
+        "TestExperiment": false,
+        "NextUpdate": false,
+        "DisabledExperiment": false,
+        "ExperimentalText": false,
+        "AllowSeedChange": false,
+        "DataDrivenBiomes": false,
+        "UpcomingCreatorFeatures": false,
+        "BetaApis": false,
+        "DataDrivenVanillaBlocksAndItems": false,
+        "DisableDataDrivenVanillaBlocksAndItems": false,
+        "ExperimentalCreatorCameras": false,
+        "MinecraftExplorer": false,
+        "DeferredTechnicalPreview": false,
+        "VillagerTradesRebalance": false,
+        "VanillaBlockGeometry": false,
+        "JigsawStructures": false,
+        "SimplifiedSpawnRules": false
     }
 }
 ```
 
 - `experiments`: List of experimental features
-  - `camera_aim_assist`: Camera Aim Assist
-  - `data_driven_biomes`: Data-Driven Biomes
-  - `gametest`: GameTest Framework
-  - `jigsaw_structures`: Data-Driven Jigsaw Structures
-  - `third_person_cameras`: Creator Cameras: New Third-Person Presets
-  - `upcoming_creator_features`: Upcoming Creator Features
-  - `villager_trades_rebalance`: Villager Trade Rebalance
-  - `y_2025_drop_1`: 2025 Drop 1
 
 ---
 
