@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2025-10-13
+
+### Changed
+
+- Adapted to LeviLamina 1.5.x and bds 1.21.102.1 [#35] @zimuya4153
+
+### Fixed
+
+- Fixed the issue of the Chinese path in the ResourcePackDownloadFix feature @zimuya4153
+- Fixed the global formatting issue of ChatFormatter [#32] @zimuya4153
+
 ## [0.4.0] - 2025-07-17
 
 ### Changed
@@ -142,8 +153,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#22]: https://github.com/GroupMountain/GMEssentials-Release/issues/22
 [#23]: https://github.com/GroupMountain/GMEssentials-Release/issues/23
 [#26]: https://github.com/GroupMountain/GMEssentials-Release/issues/26
+[#32]: https://github.com/GroupMountain/GMEssentials-Release/issues/32
+[#35]: https://github.com/GroupMountain/GMEssentials-Release/issues/35
 
-[Unreleased]: https://github.com/GroupMountain/GMEssentials/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/GroupMountain/GMEssentials/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/GroupMountain/GMEssentials/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/GroupMountain/GMEssentials/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/GroupMountain/GMEssentials/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/GroupMountain/GMEssentials/compare/v0.2.1...v0.3.0
