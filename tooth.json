@@ -18,6 +18,7 @@
             "dependencies": {
                 "github.com/LiteLDev/LeviLamina": ">=1.5.0",
                 "github.com/GroupMountain/GMLIB-Release": ">=1.5.0",
+                "github.com/GroupMountain/ModAPI-Release": ">=0.1.0",
                 "github.com/MiracleForest/iListenAttentively-Release": ">=0.8.0"
             },
             "assets": [
