@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-07-12
+
+### Changed
+
+- feat: Adapted to LeviLamina 26.20.0. @wed150
+- fix: Add container type check for ContainerRead.
+
 ## [0.8.1] - 2026-02-13
 
 ### Fixed
