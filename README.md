@@ -57,7 +57,7 @@
 
 ---
 
-### Trusted_skin (trusted_skin)
+### Trusted_skin (trusted_skin)( deprecated )
 
 **Function**: Allow players to display each other's skins normally  
 **Configuration value**: `true`/`false`
